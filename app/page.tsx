@@ -1,4 +1,3 @@
-
 import AnimatedLogo from "../components/animated-logo";
 import CTATop from "../components/cta-top";
 import LeadText from "../components/lead-text";
@@ -8,7 +7,7 @@ import CTABottom from "../components/cta-bottom";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-muted font-[family-name:var(--font-geist-sans)] flex flex-col">
+    <div className="min-h-screen bg-muted flex flex-col">
       <div className="flex flex-col bg-background w-full max-w-5xl mx-auto lg:my-8 lg:border border-border lg:drop-shadow-sm flex-grow">
         <main className="flex-grow">
           <CTATop />
