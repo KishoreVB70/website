@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 import { motion, useAnimation, cubicBezier } from 'framer-motion'
 
 export default function AnimatedLogo() {
   const controls = useAnimation()
-  const [letterStates, setLetterStates] = useState<Array<'Up' | 'Middle' | 'Down'>>(Array(10).fill('Middle'))
 
   const letters = [
     { id: 'B', d: "M0.427734 79V1.65625H21.3896C27.0146 1.65625 31.1016 3.0332 33.6504 5.78711C36.2285 8.51172 37.5176 13.0234 37.5176 19.3223V22.7061C37.5176 26.3389 36.8584 29.2832 35.54 31.5391C34.251 33.7949 32.2734 35.2744 29.6074 35.9775C33.0938 36.8564 35.4229 38.9219 36.5947 42.1738C37.7959 45.3965 38.3965 49.3369 38.3965 53.9951C38.3965 59.0049 37.9277 63.3848 36.9902 67.1348C36.0527 70.8848 34.3535 73.7998 31.8926 75.8799C29.4316 77.96 25.9307 79 21.3896 79H0.427734ZM15.5449 30.792H18.709C20.1445 30.792 21.0674 30.2354 21.4775 29.1221C21.8877 28.0088 22.0928 26.6758 22.0928 25.123V17.3447C22.0928 14.8545 20.9941 13.6094 18.7969 13.6094H15.5449V30.792ZM17.083 65.377C21.0967 65.377 23.1035 63.4727 23.1035 59.6641V49.9961C23.1035 47.7988 22.7666 46.0703 22.0928 44.8105C21.4482 43.5215 20.2178 42.877 18.4014 42.877H15.5449V65.2891C16.1895 65.3477 16.7021 65.377 17.083 65.377Z" },
@@ -19,7 +18,10 @@ export default function AnimatedLogo() {
     { id: 'E2', d: "M310.148 79V1.65625H341.086V16.5977H325.881V31.6709H340.471V46.2168H325.881V63.9268H342.097V79H310.148Z" },
   ]
 
-  const animationSequence = [
+  // Custom easing function
+  const customEase = cubicBezier(0.61, 0.28, 0, 0.98)
+
+  const animationSequence = useMemo(() => [
     [{index: 2, direction: "Down"}],
     [],
     [],
@@ -29,54 +31,45 @@ export default function AnimatedLogo() {
     [{index: 1, direction: "Down"}, {index: 3, direction: "Up"}, {index: 5, direction: "Down"}],
     [],
     [{index: 6, direction: "Up"}, {index: 8, direction: "Up"}],
-    // Corrected step: first 5 letters up, last 5 down
     [{index: 0, direction: "Up"}, {index: 1, direction: "Up"}, {index: 2, direction: "Up"}, {index: 3, direction: "Up"}, {index: 4, direction: "Up"},
      {index: 5, direction: "Down"}, {index: 6, direction: "Down"}, {index: 7, direction: "Down"}, {index: 8, direction: "Down"}, {index: 9, direction: "Down"}],
-    [], // Wait step
-    [], // Wait step
-  ]
+    [],
+    [],
+  ], [])
 
-  // Custom easing function
-  const customEase = cubicBezier(0.61, 0.28, 0, 0.98)
-
-  useEffect(() => {
-    const animateSequence = async () => {
-      for (let step of animationSequence) {
-        await controls.start(i => {
-          const animation = step.find(item => item.index === i)
-          if (animation) {
-            return {
-              y: animation.direction === "Down" ? 80 : -80,
-              transition: {
-                duration: 0.6,
-                ease: customEase,
-              }
+  const animateSequence = useCallback(async () => {
+    for (const step of animationSequence) {
+      await controls.start(i => {
+        const animation = step.find(item => item.index === i)
+        if (animation) {
+          return {
+            y: animation.direction === "Down" ? 80 : -80,
+            transition: {
+              duration: 0.6,
+              ease: customEase,
             }
           }
-          return {}
-        })
+        }
+        return {}
+      })
 
-        // Reset positions without animation
-        controls.set(i => {
-          const animation = step.find(item => item.index === i)
-          if (animation) {
-            setLetterStates(prev => {
-              const newState = [...prev]
-              newState[i] = 'Middle'
-              return newState
-            })
-            return { y: 0 }
-          }
-          return {}
-        })
+      // Reset positions without animation
+      controls.set(i => {
+        const animation = step.find(item => item.index === i)
+        if (animation) {
+          return { y: 0 }
+        }
+        return {}
+      })
 
-        await new Promise(resolve => setTimeout(resolve, 250)) // Wait 250ms between steps
-      }
-      animateSequence() // Repeat the sequence
+      await new Promise(resolve => setTimeout(resolve, 250)) // Wait 250ms between steps
     }
+    animateSequence() // Repeat the sequence
+  }, [controls, animationSequence, customEase])
 
+  useEffect(() => {
     animateSequence()
-  }, [controls])
+  }, [animateSequence])
 
   return (
     <div className="w-full p-6 border-b border-border">
