@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import AnimatedLogo from "../components/animated-logo";
 import CTATop from "../components/cta-top";
 import LeadText from "../components/lead-text";
