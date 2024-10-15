@@ -1,17 +1,16 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
+
 import { useMediaQuery } from 'react-responsive'
 import { Button } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Menu } from "lucide-react"
 import { GradientAvatar } from './gradient-avatar'
 import { NavLink } from './nav-link'
-import { NotConnectedMenu } from './not-connected-menu'
-import { ConnectedHamburgerMenu } from './connected-hamburger-menu'
 import { UserMenu } from './user-menu'
+import Logo from '../logo'
+
 
 export default function Navbar() {
   const [isConnected, setIsConnected] = useState(false)
@@ -47,14 +46,14 @@ export default function Navbar() {
     <nav className="flex items-center justify-between py-4 px-6 bg-background/80 backdrop-blur-sm border-b border-border">
       
      
-        <div className="flex-grow flex ">
+        <div className="flex sm:w-1/3">
           <div className="flex items-center space-x-6">
             <NavLink href="/explore">Explore</NavLink>
             <NavLink href="/how-it-works">How it works</NavLink>
           </div>
         </div>
-      
-       <div className="w-40 flex justify-end">
+       <Logo className='sm:block hidden' />
+       <div className="sm:w-1/3 flex justify-end">
           <div className="h-10 flex items-center">
             {isConnected ? (
               isMobile ? (

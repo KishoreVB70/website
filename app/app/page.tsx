@@ -7,7 +7,7 @@ export default function Home() {
         <Navbar />
         <main className="flex-grow">
           
-          <AnimatedLogo />
+         
           
         </main>
         
