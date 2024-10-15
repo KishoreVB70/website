@@ -15,7 +15,6 @@ import Logo from '../logo'
 export default function Navbar() {
   const [isConnected, setIsConnected] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
-  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 768 })
 
@@ -25,7 +24,7 @@ export default function Navbar() {
 
   const handleSignInClick = () => {
     setIsConnected(true)
-    setIsHamburgerMenuOpen(false)
+
   }
 
   const handleDisconnectWallet = () => {
