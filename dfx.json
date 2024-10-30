@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "badgeGate": {
+      "frontend": {
+        "entrypoint": "out/index.html"
+      },
+      "source": ["out"],
+      "type": "assets"
+    }
+  },
+  "networks": {
+    "mainnet": {
+      "providers": ["https://icp0.io"],
+      "type": "persistent"
+    }
+  }
+}
