@@ -10,26 +10,26 @@ import { GradientAvatar } from './gradient-avatar'
 import { NavLink } from './nav-link'
 import { UserMenu } from './user-menu'
 import Logo from '../logo'
-
+import { useAuth } from '@/lib/context/AuthContext'
+import useICPAuth from '@/hooks/useICPAuth'
 
 export default function Navbar() {
-  const [isConnected, setIsConnected] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 768 })
+  const {loginWithInternetIdentity, logout} = useICPAuth();
+  const { principal } = useAuth();
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  const handleSignInClick = () => {
-    setIsConnected(true)
-
+  const handleSignInClick = async() => {
+    await loginWithInternetIdentity();
   }
 
-  const handleDisconnectWallet = () => {
-    setIsConnected(false)
-    setIsUserMenuOpen(false)
+  const handleDisconnectWallet = async() => {
+    await logout();
   }
 
   // Render a loading state or nothing on the server and during mounting
@@ -43,8 +43,6 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between py-4 px-6 bg-background/80 backdrop-blur-sm border-b border-border">
-      
-     
         <div className="flex sm:w-1/3">
           <div className="flex items-center space-x-6">
             <NavLink href="/explore">Explore</NavLink>
@@ -54,7 +52,7 @@ export default function Navbar() {
        <Logo className='sm:block hidden' />
        <div className="sm:w-1/3 flex justify-end">
           <div className="h-10 flex items-center">
-            {isConnected ? (
+            {principal ? (
               isMobile ? (
                 <Drawer open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
                   <DrawerTrigger asChild>
