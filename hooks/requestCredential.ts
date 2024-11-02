@@ -3,18 +3,10 @@ import { Principal } from "@dfinity/principal";
 import { jwtDecode } from "jwt-decode";
 import { CredentialRequestSpec } from "@dfinity/verifiable-credentials/request-verifiable-presentation";
 import { internet_identity_url} from "../lib/constants";
+import { Credential } from "@/lib/types";
 
-export default function requestVC(userPrincipal: string, course: string): Promise<any> {
-    const issuer_canister_id: string = "bu5ax-5iaaa-aaaam-qbgcq-cai";   
-    const issuer_frontend_origin_url :string = "https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io";
-    const credentialType = `Verified ${course} completion on Dacade`;
-    const credentialArguments = {
-        course: course,
-    }
-    const vc_spec: CredentialRequestSpec = {
-        credentialType: credentialType,
-        arguments: credentialArguments
-    }
+export default function requestVerifiableCredential(userPrincipal: string, courseProp: Credential): Promise<any> {
+    const vc_spec: CredentialRequestSpec = courseProp.credentialSpec;
 
     return new Promise((resolve, reject) => {
         requestVerifiablePresentation({
@@ -36,8 +28,8 @@ export default function requestVC(userPrincipal: string, course: string): Promis
                 reject(error); // Reject the promise if there is an error
             },
             issuerData: {
-                origin: issuer_frontend_origin_url,
-                canisterId: Principal.fromText(issuer_canister_id),
+                origin: courseProp.derivationUrl,
+                canisterId: Principal.fromText(courseProp.canisterId),
             },
             credentialData: {
                 credentialSpec: vc_spec,
