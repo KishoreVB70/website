@@ -9,8 +9,7 @@ export const opportunities: Opportunity[] = [
       description: 'Blanditiis officia autem eos molestiae aut aliquam. Aperiam qui deleniti hic tempora deserunt in quia fugit.',
       company: 'DFINITY Foundation',
       requiredCredentials: [
-        credentials[0], // TypeScript Smart Contract 101
-        credentials[1]  // TypeScript Development 201
+        credentials[4], // Dacade TS101
       ],
       markdownContent: `
 
