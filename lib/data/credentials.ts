@@ -81,4 +81,20 @@ export const credentials: Credential[] = [
     },
     canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
+  {
+    id: '6',
+    name: 'AI101',
+    description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
+    issuer: 'Dacade',
+    link: 'https://dacade.org/communities/icp/challenges/b549466d-5ff5-5f4c-b66b-52f2899309b5',
+    derivationUrl: 'https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io',
+    issuerUrl: "https://dacade.org/",
+    credentialSpec: {
+      credentialType: "Verified course completion on Dacade",
+      arguments: {
+        "course": "AI101",
+      }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
+  },
 ];
