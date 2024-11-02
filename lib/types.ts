@@ -17,7 +17,6 @@ export interface Credential {
   }
 
 export type ICPAuthReturn = {
-  isAuthenticated: boolean;
   loginWithInternetIdentity: () => Promise<void>;
   logout: () => Promise<void>;
   isLoading: boolean;
