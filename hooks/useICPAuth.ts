@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/context/AuthContext";
 
 function useICPAuth(): ICPAuthReturn {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const { setPrincipal } = useAuth();
 
@@ -22,7 +23,7 @@ function useICPAuth(): ICPAuthReturn {
         setPrincipal(identity.getPrincipal().toText());
       }
       setIsAuthenticated(authStatus);
-
+      setIsLoading(false);
     }
     initializeAuthClient();
   }, []);
@@ -53,7 +54,7 @@ function useICPAuth(): ICPAuthReturn {
     }
   }, [authClient]);
 
-  return { isAuthenticated, loginWithInternetIdentity, logout };
+  return { isAuthenticated, loginWithInternetIdentity, logout, isLoading };
 }
 
 export default useICPAuth;
