@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
-import { GradientAvatar } from './gradient-avatar';
 import { useAuth } from '@/lib/context/AuthContext';
+import Avatar from 'boring-avatars';
+
 
 interface UserMenuProps {
   isMobile?: boolean;
@@ -13,10 +14,11 @@ interface UserMenuProps {
 
 export const UserMenu: React.FC<UserMenuProps> = ({ handleDisconnectWallet }) => {
   const { principal } = useAuth();
+  const avatarProp = principal ?? "Default";
   return (
     <div className="flex flex-col">
       <div className="flex flex-col items-center mb-6 pt-6 px-2">
-        <GradientAvatar size={80} />
+        <Avatar name={avatarProp} size={80} />
         <p className="mt-2 font-medium text-sm">{`${principal?.slice(0, 4)}....${principal?.slice(-3)}`}</p>
       </div>
       <Separator className="w-full mb-2" />
