@@ -9,7 +9,7 @@ export const opportunities: Opportunity[] = [
       description: 'Blanditiis officia autem eos molestiae aut aliquam. Aperiam qui deleniti hic tempora deserunt in quia fugit.',
       company: 'DFINITY Foundation',
       requiredCredentials: [
-        credentials[0], // Dacade TS101
+        credentials[4], // Dacade TS101
       ],
       markdownContent: `
 
@@ -61,7 +61,7 @@ All qualified applicants will receive consideration for employment without regar
       description: 'Seeking an experienced blockchain developer to work on cutting-edge decentralized applications.',
       company: 'Ethereum Foundation',
       requiredCredentials: [
-        credentials[0], // TS101
+        credentials[4], // TS101
         // credentials[2], // Solidity Programming
         // credentials[3]  // Smart Contract Security
       ],
