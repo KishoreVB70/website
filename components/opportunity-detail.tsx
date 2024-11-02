@@ -35,7 +35,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       }
       return storedCredential;
     } catch(error) {
-      console.log(error);
+      console.log("Error in credential request process, unable to obtain credential ", error);
     }
   }
 

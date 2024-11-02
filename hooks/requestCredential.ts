@@ -13,18 +13,19 @@ export default function requestVerifiableCredential(userPrincipal: string, cours
             onSuccess: async (res: VerifiablePresentationResponse) => {
                 try {
                     let token: string;
-                    let decodedToken: any;
                     if("Ok" in res) {
                         token = res.Ok;
-                        decodedToken = jwtDecode(token);
                         resolve(token);
+                    } else {
+                        const error = res.Err;
+                        reject(error);
                     }
-                } catch (error) {
+                } catch(error) {
                     reject(error);
                 }
+
             },
-            onError: (error: any) => {
-                console.log("Error: ", error);
+            onError: (error) => {
                 reject(error); // Reject the promise if there is an error
             },
             issuerData: {
