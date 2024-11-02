@@ -20,22 +20,20 @@ export default function requestVC(userPrincipal: string, course: string): Promis
         requestVerifiablePresentation({
             onSuccess: async (res: VerifiablePresentationResponse) => {
                 try {
-                    let token: any;
-                    let decodedToken: any
+                    let token: string;
+                    let decodedToken: any;
                     if("Ok" in res) {
                         token = res.Ok;
                         decodedToken = jwtDecode(token);
-                    } else {
-                        reject("Error in presentation response");
+                        resolve(token);
                     }
-                    resolve(token);
                 } catch (error) {
                     reject(error);
                 }
             },
-            onError: (e: any) => {
-                console.log("Error: ", e);
-                reject(e); // Reject the promise if there is an error
+            onError: (error: any) => {
+                console.log("Error: ", error);
+                reject(error); // Reject the promise if there is an error
             },
             issuerData: {
                 origin: issuer_frontend_origin_url,
