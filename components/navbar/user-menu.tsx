@@ -11,7 +11,7 @@ interface UserMenuProps {
   handleDisconnectWallet: () => void;
 }
 
-export const UserMenu: React.FC<UserMenuProps> = ({ isMobile = false, handleDisconnectWallet }) => {
+export const UserMenu: React.FC<UserMenuProps> = ({ handleDisconnectWallet }) => {
   const { principal } = useAuth();
   return (
     <div className="flex flex-col">
@@ -21,13 +21,13 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isMobile = false, handleDisc
       </div>
       <Separator className="w-full mb-2" />
       <div className="space-y-2 px-2">
-        <Button variant="ghost" className={`w-full justify-between py-3.5 px-2 ${isMobile ? 'text-lg' : 'text-sm'}`} asChild>
+      <Button variant="ghost" className="w-full justify-between py-3.5 px-2 text-lg lg:text-sm" asChild>
           <Link href="/opportunities">
             <span>My opportunities</span>
             <ChevronRight className="h-5 w-5" />
           </Link>
         </Button>
-        <Button variant="ghost" className={`w-full justify-between py-3.5 px-2 ${isMobile ? 'text-lg' : 'text-sm'}`} asChild>
+        <Button variant="ghost" className="w-full justify-between py-3.5 px-2 text-lg lg:text-sm" asChild>
           <Link href="/help">
             <span>Help center</span>
             <ChevronRight className="h-5 w-5" />
@@ -38,7 +38,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isMobile = false, handleDisc
       <div className="px-2 pb-2">
         <Button 
           variant="ghost" 
-          className={`w-full justify-between text-destructive py-3.5 px-2 ${isMobile ? 'text-lg' : 'text-sm'}`}
+          className="w-full justify-between text-destructive py-3.5 px-2 text-lg lg:text-sm"
           onClick={handleDisconnectWallet}
         >
           <span>Disconnect wallet</span>
