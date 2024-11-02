@@ -28,5 +28,13 @@ export const credentials: Credential[] = [
     description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
     issuer: 'Blockchain Security Institute',
     link: 'https://bsi.edu/smart-contract-security'
-  }
+  },
+  {
+    id: '5',
+    name: 'TS101',
+    description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
+    issuer: 'Dacade',
+    link: 'https://dacade.org'
+  },
+
 ];
