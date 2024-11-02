@@ -8,14 +8,36 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import requestVerifiableCredential from '@/hooks/requestCredential';
 import { useAuth } from '../lib/context/AuthContext';
+import { jwtDecode } from 'jwt-decode';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
 }
 
+
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
   const { principal } = useAuth();
+
+  function getCredentialFromLocalStorage(key: string) {
+    try {
+      const storedCredential: string | null = localStorage.getItem(key);
+      if (!storedCredential) return null;
+
+      const decodedToken: any = jwtDecode(storedCredential);
+      const decodedIssuerToken: any = jwtDecode(decodedToken.vp?.verifiableCredential[1]);
+      const expTimeStamp = decodedIssuerToken.iss;
+      // Expiry time is in UNIX timestamp seconds
+      // Convert into milliseconds for Javascript Date API - *1000
+      if (new Date() > new Date(expTimeStamp * 1000)) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      return storedCredential;
+    } catch(error) {
+      console.log(error);
+    }
+  }
 
   async function handleCheckPermissions() {
     try {
@@ -23,8 +45,21 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
         alert("Login to check permissions");
         return;
       }
-      let result = await requestVerifiableCredential(principal, opportunity.requiredCredentials[0]);
-      console.log(result);
+
+      let credentialId = opportunity.requiredCredentials[0].id;
+      const key = `credential_${principal}_${credentialId}`;
+
+      // Check if user already has a credential
+      const credential = getCredentialFromLocalStorage(key);
+      if(credential) {
+        console.log("Credential present");
+        return;
+      }
+      console.log("Credential not present in storage");
+
+      let result: string = await requestVerifiableCredential(principal, opportunity.requiredCredentials[0]);
+      localStorage.setItem(key, result);
+      console.log("Credential Obtained");
     }
     catch(error) {
       console.log("Error while requesting credential: ", error);
@@ -64,8 +99,6 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
         <ReactMarkdown>{opportunity.markdownContent}</ReactMarkdown>
       </div>
-      
-      
     </div>
   );
 }
