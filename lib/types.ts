@@ -1,9 +1,14 @@
+import { CredentialRequestSpec } from "@dfinity/verifiable-credentials/request-verifiable-presentation";
+
 export interface Credential {
     id: string;
     name: string;
     description: string;
     issuer: string;
     link: string;
+    derivationUrl: string;
+    issuerUrl: string;
+    credentialSpec: CredentialRequestSpec;
   }
   
   export interface Opportunity {
