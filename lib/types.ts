@@ -9,6 +9,7 @@ export interface Credential {
     derivationUrl: string;
     issuerUrl: string;
     credentialSpec: CredentialRequestSpec;
+    canisterId: string;
   }
   
   export interface Opportunity {

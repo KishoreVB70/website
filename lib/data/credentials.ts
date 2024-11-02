@@ -14,7 +14,8 @@ export const credentials: Credential[] = [
       arguments: {
         "course": "TypeScript Smart Contract 101",
       }
-    }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
   {
     id: '2',
@@ -29,7 +30,8 @@ export const credentials: Credential[] = [
       arguments: {
         "course": "TypeScript Development 201",
       }
-    }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
   {
     id: '3',
@@ -44,7 +46,8 @@ export const credentials: Credential[] = [
       arguments: {
         "course": "Solidity Programming",
       }
-    }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
   {
     id: '4',
@@ -59,7 +62,8 @@ export const credentials: Credential[] = [
       arguments: {
         "course": "Smart Contract Security",
       }
-    }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
   {
     id: '5',
@@ -74,6 +78,7 @@ export const credentials: Credential[] = [
       arguments: {
         "course": "TS101",
       }
-    }
+    },
+    canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
 ];
