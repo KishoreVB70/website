@@ -39,13 +39,13 @@ export default function Navbar() {
       <div className="sm:w-1/3 flex justify-end">
         <div className="h-10 flex items-center">
           {isLoading ? (
-            <div className="animate-spin duration-500 rounded-full h-10 px-4 py-2 w-6 border-t-2 border-gray-500"></div>
+            <div className="animate-spin duration-500 rounded-full h-10 mr-5 py-2 w-6 border-t-2 border-gray-500"></div>
           ) : principal ? (
             // Display user menu or avatar based on screen size when not loading
             isMobile ? (
               <Drawer open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
                 <DrawerTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 p-0 rounded-full">
+                  <Button variant="ghost" className=" mr-4 relative h-8 w-8 p-0 rounded-full">
                     <GradientAvatar size={32} />
                   </Button>
                 </DrawerTrigger>
@@ -56,7 +56,7 @@ export default function Navbar() {
             ) : (
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button variant="ghost" className="h-10 w-10 p-0 rounded-full">
+                  <Button variant="ghost" className="mr-4 h-10 w-10 p-0 rounded-full">
                     <GradientAvatar size={40} />
                   </Button>
                 </PopoverTrigger>
