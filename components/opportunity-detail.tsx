@@ -1,3 +1,4 @@
+"use client"
 import { formatDistanceToNow } from 'date-fns';
 import { CircleUserRound } from "lucide-react"
 import { Opportunity } from '@/lib/types';
@@ -5,6 +6,8 @@ import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import requestVerifiableCredential from '@/hooks/requestCredential';
+import { useAuth } from '../lib/context/AuthContext';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
@@ -12,6 +15,22 @@ interface OpportunityDetailProps {
 
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
+  const { principal } = useAuth();
+
+  async function handleCheckPermissions() {
+    try {
+      if(!principal) {
+        alert("Login to check permissions");
+        return;
+      }
+      let result = await requestVerifiableCredential(principal, opportunity.requiredCredentials[0]);
+      console.log(result);
+    }
+    catch(error) {
+      console.log("Error while requesting credential: ", error);
+    }
+  }
+
 
   return (
     <div className="max-w-2xl mx-auto p-6 my-8 sm:mt-16 lg:mt-24">
@@ -39,7 +58,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
         </ul>
         </CardContent>
         <CardFooter>
-          <Button className='w-full'>Check your permissions</Button>
+          <Button onClick={handleCheckPermissions} className='w-full'>Check your permissions</Button>
         </CardFooter>
       </Card>
       <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
