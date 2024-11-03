@@ -36,7 +36,7 @@ export default function OpportunityCard({
                 <span className="font-semibold">{company}</span>
               </div>
             </div>
-            <Link href={`/opportunity/${id}`} className={buttonVariants({ variant: "outline" })}>
+            <Link href={`/app/opportunity/${id}`} className={buttonVariants({ variant: "outline" })}>
               Learn more
             </Link>
           </div>
