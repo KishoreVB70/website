@@ -27,3 +27,18 @@ export type ICPAuthReturn = {
   logout: () => Promise<void>;
   isLoading: boolean;
 };
+
+export type DecodedJWT = {
+  iss: string;
+  vp: {
+    "@Context": string;
+    type: string,
+    // Exactly two strings: one for alias credential, one for requested credential
+    verifiableCredential: [string, string];
+  }
+}
+
+export type DecodedRequestedCredential = {
+  exp: number;
+  iss: string;
+};
