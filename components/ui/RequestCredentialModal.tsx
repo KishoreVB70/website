@@ -1,12 +1,13 @@
 // components/ModalOverlay.tsx
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { CredentialStatus } from '@/lib/types';
 
 interface RequestCredentialModalProps {
   statusMessage: string;
   onClose: () => void;
-  onRequestCredential?: () => void;
-  credentialStatus: "present" | "not_present" | null;
+  onRequestCredential: () => void;
+  credentialStatus: CredentialStatus;
 }
 
 const RequestCredentialModal: React.FC<RequestCredentialModalProps> = ({
@@ -20,7 +21,7 @@ const RequestCredentialModal: React.FC<RequestCredentialModalProps> = ({
       <div className="bg-white p-6 rounded-lg shadow-lg h-40 mt-[50vh] w-11/12 max-w-md text-center">
         <p className="mb-4 text-lg font-medium">{statusMessage}</p>
         
-        {/* Show "Request Credential" button if credential is not present */}
+        {/* Show "Request Credential" button only if credential is not present */}
         {credentialStatus === "not_present" && onRequestCredential && (
           <Button onClick={onRequestCredential} className="mb-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
             Request Credential

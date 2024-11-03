@@ -42,3 +42,5 @@ export type DecodedRequestedCredential = {
   exp: number;
   iss: string;
 };
+
+export type CredentialStatus = "present" | "not_present" | null;

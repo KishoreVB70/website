@@ -1,14 +1,14 @@
 "use client";
 import { formatDistanceToNow } from 'date-fns';
 import { CircleUserRound } from "lucide-react";
-import { DecodedJWT, DecodedRequestedCredential, Opportunity } from '@/lib/types';
+import { CredentialStatus, DecodedJWT, DecodedRequestedCredential, Opportunity } from '@/lib/types';
 import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import requestVerifiableCredential from '@/hooks/requestCredential';
 import { useAuth } from '../lib/context/AuthContext';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { useState } from 'react';
 import RequestCredentialModal from '@/components/ui/RequestCredentialModal'; // Import the new ModalOverlay component
 
@@ -19,7 +19,7 @@ interface OpportunityDetailProps {
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
-  const [credentialStatus, setCredentialStatus] = useState<"present" | "not_present" | null>(null);
+  const [credentialStatus, setCredentialStatus] = useState<CredentialStatus>(null);
   
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
   const { principal } = useAuth();
@@ -78,7 +78,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
 
       localStorage.setItem(key, result);
       setCredentialStatus("present");
-      setStatusMessage("Credential obtained.");
+      setStatusMessage("Credential obtained");
     } catch (error) {
       setStatusMessage("Failed to obtain credential Please try again");
     }
@@ -131,7 +131,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
         <RequestCredentialModal
           statusMessage={statusMessage}
           onClose={closeModal}
-          onRequestCredential={credentialStatus === "not_present" ? handleRequestCredential : undefined}
+          onRequestCredential={handleRequestCredential}
           credentialStatus={credentialStatus}
         />
       )}
