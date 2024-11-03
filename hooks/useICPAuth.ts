@@ -5,7 +5,7 @@ import { ICPAuthReturn } from "@/lib/types";
 import { useAuth } from "@/lib/context/AuthContext";
 
 function useICPAuth(): ICPAuthReturn {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const { setPrincipal } = useAuth();
 
@@ -21,8 +21,7 @@ function useICPAuth(): ICPAuthReturn {
         const identity = client.getIdentity();
         setPrincipal(identity.getPrincipal().toText());
       }
-      setIsAuthenticated(authStatus);
-
+      setIsLoading(false);
     }
     initializeAuthClient();
   }, []);
@@ -32,7 +31,6 @@ function useICPAuth(): ICPAuthReturn {
       await authClient.login({
         identityProvider: ii_frontend_url_experimental,
         onSuccess: () => {
-          setIsAuthenticated(true);
           const identity = authClient.getIdentity();
           setPrincipal(identity.getPrincipal().toText());
         },
@@ -43,7 +41,6 @@ function useICPAuth(): ICPAuthReturn {
   const logout = useCallback(async () => {
     if (authClient) {
       await authClient.logout();
-      setIsAuthenticated(false);
       setPrincipal(null);
       /* 
       Creating a new instance of authClient to 
@@ -53,7 +50,7 @@ function useICPAuth(): ICPAuthReturn {
     }
   }, [authClient]);
 
-  return { isAuthenticated, loginWithInternetIdentity, logout };
+  return { loginWithInternetIdentity, logout, isLoading };
 }
 
 export default useICPAuth;
