@@ -6,7 +6,7 @@ import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import requestVerifiableCredential from '@/hooks/requestCredential';
+import requestVerifiableCredential from '@/lib/services/requestCredential';
 import { useAuth } from '../lib/context/AuthContext';
 import { jwtDecode } from 'jwt-decode';
 import { useState } from 'react';
