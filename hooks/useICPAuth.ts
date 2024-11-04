@@ -3,6 +3,7 @@ import { AuthClient } from "@dfinity/auth-client";
 import { ii_frontend_url_experimental } from "@/lib/constants";
 import { ICPAuthReturn } from "@/lib/types";
 import { useAuth } from "@/lib/context/AuthContext";
+import { popupCenter } from "@/lib/utils";
 
 function useICPAuth(): ICPAuthReturn {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -34,6 +35,7 @@ function useICPAuth(): ICPAuthReturn {
           const identity = authClient.getIdentity();
           setPrincipal(identity.getPrincipal().toText());
         },
+        windowOpenerFeatures: popupCenter(),
       });
     }
   }, [authClient]);
