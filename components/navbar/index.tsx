@@ -6,18 +6,19 @@ import { useMediaQuery } from 'react-responsive'
 import { Button } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { GradientAvatar } from './gradient-avatar'
 import { NavLink } from './nav-link'
 import { UserMenu } from './user-menu'
 import Logo from '../logo'
 import { useAuth } from '@/lib/context/AuthContext'
 import useICPAuth from '@/hooks/useICPAuth'
+import Avatar from 'boring-avatars'
 
 export default function Navbar() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 768 })
   const {loginWithInternetIdentity, logout, isLoading} = useICPAuth();
   const { principal } = useAuth();
+  const avatarProp = principal ?? "Default";
 
   const handleSignInClick = async() => {
     await loginWithInternetIdentity();
@@ -46,7 +47,7 @@ export default function Navbar() {
               <Drawer open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
                 <DrawerTrigger asChild>
                   <Button variant="ghost" className=" mr-4 relative h-8 w-8 p-0 rounded-full">
-                    <GradientAvatar size={32} />
+                    <Avatar name={avatarProp} size={32} />
                   </Button>
                 </DrawerTrigger>
                 <DrawerContent>
@@ -57,7 +58,7 @@ export default function Navbar() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button variant="ghost" className="mr-4 h-10 w-10 p-0 rounded-full">
-                    <GradientAvatar size={40} />
+                  <Avatar name={avatarProp} size={40} />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80 p-0" align="end">
