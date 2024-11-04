@@ -22,7 +22,7 @@ const RequestCredentialModal: React.FC<RequestCredentialModalProps> = ({
         <p className="mb-4 text-lg font-medium">{statusMessage}</p>
         
         {/* Show "Request Credential" button only if credential is not present */}
-        {credentialStatus === "not_present" && onRequestCredential && (
+        {credentialStatus === "not_present" && (
           <Button onClick={onRequestCredential} className="mb-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
             Request Credential
           </Button>
