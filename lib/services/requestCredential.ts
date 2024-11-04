@@ -4,7 +4,7 @@ import { CredentialRequestSpec } from "@dfinity/verifiable-credentials/request-v
 import { internet_identity_url} from "@/lib/constants";
 import { Credential } from "@/lib/types";
 
-export default function requestVerifiableCredential(userPrincipal: string, courseProp: Credential): Promise<any> {
+export default function requestVerifiableCredential(userPrincipal: string, courseProp: Credential): Promise<string> {
     const vc_spec: CredentialRequestSpec = courseProp.credentialSpec;
 
     return new Promise((resolve, reject) => {
@@ -19,7 +19,8 @@ export default function requestVerifiableCredential(userPrincipal: string, cours
                         reject(error);
                     }
                 } catch(error) {
-                    reject(error);
+                    console.log(error);
+                    reject("Error in credential process");
                 }
 
             },

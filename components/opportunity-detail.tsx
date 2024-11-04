@@ -80,6 +80,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       setCredentialStatus("present");
       setStatusMessage("Credential obtained");
     } catch (error) {
+      console.log(error);
       setStatusMessage("Failed to obtain credential Please try again");
     }
   }
