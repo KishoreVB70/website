@@ -3,6 +3,7 @@ import { Principal } from "@dfinity/principal";
 import { CredentialRequestSpec } from "@dfinity/verifiable-credentials/request-verifiable-presentation";
 import { internet_identity_url} from "@/lib/constants";
 import { Credential } from "@/lib/types";
+import { popupCenter } from "../utils";
 
 export default function requestVerifiableCredential(userPrincipal: string, courseProp: Credential): Promise<string> {
     const vc_spec: CredentialRequestSpec = courseProp.credentialSpec;
@@ -37,6 +38,7 @@ export default function requestVerifiableCredential(userPrincipal: string, cours
                 credentialSubject: Principal.fromText(userPrincipal),
             },
             identityProvider: new URL(internet_identity_url),
+            windowOpenerFeatures: popupCenter(),
         });
     });
 }
