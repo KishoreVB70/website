@@ -1,7 +1,7 @@
 import { requestVerifiablePresentation, VerifiablePresentationResponse } from "@dfinity/verifiable-credentials/request-verifiable-presentation";
 import { Principal } from "@dfinity/principal";
 import { CredentialRequestSpec } from "@dfinity/verifiable-credentials/request-verifiable-presentation";
-import { internet_identity_url} from "@/lib/constants";
+import { demo_frontend_url, internet_identity_url} from "@/lib/constants";
 import { Credential } from "@/lib/types";
 import { popupCenter } from "../utils";
 
@@ -29,7 +29,7 @@ export default function requestVerifiableCredential(userPrincipal: string, cours
                 reject(error);
             },
             issuerData: {
-                origin: courseProp.derivationUrl,
+                origin: demo_frontend_url,
                 canisterId: Principal.fromText(courseProp.canisterId),
             },
             credentialData: {
