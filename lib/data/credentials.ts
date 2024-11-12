@@ -76,14 +76,14 @@ export const credentials: Credential[] = [
     credentialSpec: {
       credentialType: "Verified course completion on Dacade",
       arguments: {
-        "course": "TS101",
+        "course": "typescript-smart-contract-101",
       }
     },
     canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
   },
   {
     id: '6',
-    name: 'AI101',
+    name: 'AI Dapp Development 101 ',
     description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
     issuer: 'Dacade',
     link: 'https://dacade.org/communities/icp/challenges/b549466d-5ff5-5f4c-b66b-52f2899309b5',
@@ -92,7 +92,7 @@ export const credentials: Credential[] = [
     credentialSpec: {
       credentialType: "Verified course completion on Dacade",
       arguments: {
-        "course": "AI101",
+        "course": "ai-dapp-development-101",
       }
     },
     canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
