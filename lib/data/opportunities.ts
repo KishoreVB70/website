@@ -1,7 +1,6 @@
 import { Opportunity } from '@/lib/types';
 import { credentials } from '@/lib/data/credentials';
 
-// @ts-ignore
 export const opportunities: Opportunity[] = [
     {
       id: '1',
