@@ -71,7 +71,7 @@ export const credentials: Credential[] = [
     description: 'The credential proves that the owner successfully absolved an introduction to developing on the Internet Computer Protocol (ICP) platform using TypeScript.',
     issuer: 'Dacade',
     link: 'https://dacade.org/communities/icp/challenges/256f0a1c-5f4f-495f-a1b3-90559ab3c51f',
-    derivationUrl: 'https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io',
+    derivationUrl: 'https://staging-dacade.netlify.app',
     issuerUrl: "https://dacade.org/",
     credentialSpec: {
       credentialType: "Verified course completion on Dacade",
@@ -87,7 +87,7 @@ export const credentials: Credential[] = [
     description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
     issuer: 'Dacade',
     link: 'https://dacade.org/communities/icp/challenges/b549466d-5ff5-5f4c-b66b-52f2899309b5',
-    derivationUrl: 'https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io',
+    derivationUrl: 'https://staging-dacade.netlify.app',
     issuerUrl: "https://dacade.org/",
     credentialSpec: {
       credentialType: "Verified course completion on Dacade",

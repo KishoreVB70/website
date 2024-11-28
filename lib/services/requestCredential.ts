@@ -29,7 +29,7 @@ export default function requestVerifiableCredential(userPrincipal: string, cours
                 reject(error);
             },
             issuerData: {
-                origin: demo_frontend_url,
+                origin: courseProp.derivationUrl,
                 canisterId: Principal.fromText(courseProp.canisterId),
             },
             credentialData: {
